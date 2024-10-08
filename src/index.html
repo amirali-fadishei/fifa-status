@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fifa 21 Players</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Fifa 21 Players</a>
+      </div>
+    </nav>
+    <div class="container-fluid mt-3">
+      <div class="row">
+        <div class="col-md-3 col-12 mb-3 mb-md-0">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="mb-3">Filters</h4>
+              <select id="position-select" class="form-select mb-3">
+                <option selected disabled value="">Position</option>
+              </select>
+              <select id="nationality-select" class="form-select mb-3">
+                <option selected disabled value="">Nationality</option>
+              </select>
+              <div class="d-grid gap-2">
+                <button id="filter-btn" class="btn btn-primary" type="button">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9 col-12">
+          <div>
+            <input
+              class="form-control"
+              id="search-field"
+              placeholder="Search..."
+            />
+          </div>
+          <hr />
+          <div class="mb-3">
+            <small class="text-muted me-2">Sort base on:</small>
+            <div class="btn-group btn-group-sm" role="group">
+              <input
+                type="radio"
+                class="btn-check"
+                name="sort-radio"
+                id="sort-radio-overall"
+                value="sort-radio-overall"
+                autocomplete="off"
+                checked
+              />
+              <label class="btn btn-outline-primary" for="sort-radio-overall">
+                Overall
+              </label>
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="sort-radio"
+                id="sort-radio-name"
+                value="sort-radio-name"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="sort-radio-name">
+                Name
+              </label>
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="sort-radio"
+                id="sort-radio-age"
+                value="sort-radio-age"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" for="sort-radio-age">
+                Age
+              </label>
+            </div>
+          </div>
+          <div class="card">
+            <div class="table-responsive">
+              <table id="players-table" class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Club Team</th>
+                    <th scope="col">OVR</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Nationality</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
