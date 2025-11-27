@@ -1,43 +1,30 @@
-const axios = require("axios").default;
-import { SERVER_URL } from "../constants/Server";
-import { RequestError } from "../constants/Error";
+import { API_BASE } from "../constants/Server";
 
-const axiosAgent = axios.create({
-  baseURL: SERVER_URL,
-});
-
-export const getPlayers = () => {
-  return axiosAgent.get("/players").then((response) => {
-    if (response.status === 200) {
-      if (response.data.success) {
-        return response.data.data;
-      }
-      throw new Error(RequestError.UNSUCCESS);
-    }
-    throw new Error(RequestError.FAILED);
-  });
+const handleResponse = async (response) => {
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+  const payload = await response.json();
+  if (!payload.success) {
+    throw new Error("API responded without success flag");
+  }
+  return payload;
 };
 
-export const getPlayersPositions = () => {
-  return axiosAgent.get("/players/positions").then((response) => {
-    if (response.status === 200) {
-      if (response.data.success) {
-        return response.data.data;
-      }
-      throw new Error(RequestError.UNSUCCESS);
-    }
-    throw new Error(RequestError.FAILED);
-  });
+export const fetchMeta = async () => {
+  const response = await fetch(`${API_BASE}/meta`);
+  const payload = await handleResponse(response);
+  return payload.data;
 };
 
-export const getPlayersNationality = () => {
-  return axiosAgent.get("/players/nationality").then((response) => {
-    if (response.status === 200) {
-      if (response.data.success) {
-        return response.data.data;
-      }
-      throw new Error(RequestError.UNSUCCESS);
-    }
-    throw new Error(RequestError.FAILED);
-  });
+export const fetchPlayers = async (filters) => {
+  const params = new URLSearchParams();
+  if (filters.search) params.set("search", filters.search);
+  if (filters.position) params.set("position", filters.position);
+  if (filters.nationality) params.set("nationality", filters.nationality);
+  if (filters.sort) params.set("sort", filters.sort);
+
+  const response = await fetch(`${API_BASE}/players?${params.toString()}`);
+  const payload = await handleResponse(response);
+  return payload.data;
 };
