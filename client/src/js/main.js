@@ -1,145 +1,161 @@
-import { fetchMeta, fetchPlayers } from "./api";
-import { SortKey } from "../constants/SortKey";
+import { getPlayers, getPlayersNationality, getPlayersPositions } from "./api";
+import { SortKey, Key } from "../constants/SortKey";
+import { SERVER_URL } from "../constants/Server";
 
-const state = {
-  players: [],
-  meta: { positions: [], nationalities: [], totalPlayers: 0, updated: "" },
-  filters: {
-    search: "",
-    position: "",
-    nationality: "",
-    sort: SortKey.OVERALL,
-  },
+let players = [];
+let positions = [];
+let nationalities = [];
+let searchKey = null;
+let selectedPosition = null;
+let selectedNationality = null;
+let sortKey = SortKey.OVERALL;
+
+function setOverallClass(overall) {
+  if (overall >= 90) {
+    return "one";
+  }
+  if (overall >= 80) {
+    return "two";
+  }
+  return "three";
+}
+
+function generatePlayerRow(player, idx) {
+  return `
+  <tr>
+    <th scope="row">${idx}</th>
+    <td>
+      <img src="${SERVER_URL}/${player.imageUrl}" width="60" />
+    </td>
+    <td>${player.shortName}</td>
+    <td>${player.clubName}</td>
+    <td>
+      <span class="overall overall--${setOverallClass(
+        Number(player.overall)
+      )}">${player.overall}</span>
+    </td>
+    <td>${player.age}</td>
+    <td>${player.nationality}</td>
+  </tr>
+  `;
+}
+
+const filterBasedOnSearchKey = (el) => {
+  return searchKey === null || el.shortName.includes(searchKey);
 };
 
-const playerGrid = document.getElementById("players-grid");
-const summaryBar = document.getElementById("summary-text");
-const positionSelect = document.getElementById("position-select");
-const nationalitySelect = document.getElementById("nationality-select");
-const sortSelect = document.getElementById("sort-select");
-const searchField = document.getElementById("search-field");
-const resetButton = document.getElementById("reset-btn");
-const loadingBanner = document.getElementById("loading-banner");
+const filterBasedOnPosition = (el) => {
+  return selectedPosition === null || el.positions.includes(selectedPosition);
+};
 
-const formatCurrency = (value) =>
-  new Intl.NumberFormat("en", { style: "currency", currency: "EUR", notation: "compact" }).format(value);
+const filterBasedOnNationality = (el) => {
+  return selectedNationality === null || el.nationality === selectedNationality;
+};
 
-const renderMeta = () => {
-  positionSelect.innerHTML = '<option value="">Any position</option>';
-  nationalitySelect.innerHTML = '<option value="">Any nationality</option>';
+function renderPlayers() {
+  const table = document.getElementById("players-table").querySelector("tbody");
+  table.innerHTML = "";
 
-  state.meta.positions.forEach((position) => {
-    positionSelect.innerHTML += `<option value="${position}">${position}</option>`;
+  players
+    .filter(
+      (el) =>
+        filterBasedOnSearchKey(el) &&
+        filterBasedOnPosition(el) &&
+        filterBasedOnNationality(el)
+    )
+    .sort((a, b) => {
+      const key = Key[sortKey];
+      return b[key] > a[key] ? 1 : a[key] > b[key] ? -1 : 0;
+    })
+    .forEach((player, idx) => {
+      table.innerHTML += generatePlayerRow(player, idx + 1);
+    });
+}
+
+function renderPositions() {
+  const elm = document.getElementById("position-select");
+  positions.forEach((position) => {
+    elm.innerHTML += `<option value="${position}">${position}</option>`;
   });
+}
 
-  state.meta.nationalities.forEach((nationality) => {
-    nationalitySelect.innerHTML += `<option value="${nationality}">${nationality}</option>`;
+function renderNationality() {
+  const elm = document.getElementById("nationality-select");
+  nationalities.forEach((nationality) => {
+    elm.innerHTML += `<option value="${nationality}">${nationality}</option>`;
   });
-};
+}
 
-const createBadge = (value) => `<span class="badge rounded-pill bg-dark-subtle text-dark me-1">${value}</span>`;
+function loadPlayers() {
+  getPlayers()
+    .then((result) => {
+      players = result;
+      renderPlayers();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
-const renderPlayers = () => {
-  playerGrid.innerHTML = "";
-  const template = document.createDocumentFragment();
+function loadPositions() {
+  getPlayersPositions()
+    .then((result) => {
+      positions = result;
+      renderPositions();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
-  state.players.forEach((player) => {
-    const card = document.createElement("article");
-    card.className = "player-card shadow-sm";
-    card.innerHTML = `
-      <div class="player-card__header">
-        <div>
-          <p class="text-uppercase small text-muted mb-1">${player.league}</p>
-          <h3 class="h5 mb-0">${player.name}</h3>
-          <p class="mb-0 text-body-secondary">${player.club}</p>
-        </div>
-        <div class="rating-badge rating-badge--${player.overall >= 90 ? "elite" : "pro"}">${player.overall}</div>
-      </div>
-      <div class="player-card__body">
-        <img class="player-card__image" src="${player.image}" alt="${player.name}" loading="lazy" />
-        <div>
-          <p class="fw-semibold mb-1">${player.nationality} · ${player.age} yrs · ${player.foot}-footed</p>
-          <div class="mb-2">${player.positions.map(createBadge).join("")}</div>
-          <dl class="row g-2 mb-0 small">
-            <dt class="col-6 text-muted">Potential</dt>
-            <dd class="col-6 text-end fw-semibold">${player.potential}</dd>
-            <dt class="col-6 text-muted">Market value</dt>
-            <dd class="col-6 text-end fw-semibold">${formatCurrency(player.valueEur)}</dd>
-            <dt class="col-6 text-muted">Weekly wage</dt>
-            <dd class="col-6 text-end fw-semibold">${formatCurrency(player.wageEur)}</dd>
-          </dl>
-        </div>
-      </div>
-    `;
-    template.appendChild(card);
-  });
+function loadNationality() {
+  getPlayersNationality()
+    .then((result) => {
+      nationalities = result;
+      renderNationality();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
-  playerGrid.appendChild(template);
-  summaryBar.textContent = `${state.players.length} players · Updated from ${state.meta.updated}`;
-};
-
-const toggleLoading = (isLoading) => {
-  loadingBanner.classList.toggle("d-none", !isLoading);
-};
-
-const refreshPlayers = async () => {
-  toggleLoading(true);
-  try {
-    state.players = await fetchPlayers(state.filters);
+function setupEventListener() {
+  document.getElementById("search-field").addEventListener("input", (e) => {
+    searchKey = e.target.value;
     renderPlayers();
-  } catch (err) {
-    summaryBar.textContent = `Something went wrong: ${err.message}`;
-  } finally {
-    toggleLoading(false);
-  }
-};
-
-const handleFilterChange = (key, value) => {
-  state.filters[key] = value;
-  refreshPlayers();
-};
-
-const wireEvents = () => {
-  searchField.addEventListener("input", (event) => {
-    handleFilterChange("search", event.target.value.trim());
   });
 
-  positionSelect.addEventListener("change", (event) => {
-    handleFilterChange("position", event.target.value);
+  document.getElementById("filter-btn").addEventListener("click", (e) => {
+    const nationalityElm = document.getElementById("nationality-select");
+    const positionElm = document.getElementById("position-select");
+    if (nationalityElm.value) {
+      selectedNationality = nationalityElm.value;
+    }
+    if (positionElm.value) {
+      selectedPosition = positionElm.value;
+    }
+    renderPlayers();
   });
 
-  nationalitySelect.addEventListener("change", (event) => {
-    handleFilterChange("nationality", event.target.value);
+  const radios = document.querySelectorAll(
+    'input[type=radio][name="sort-radio"]'
+  );
+
+  radios.forEach((el) => {
+    // # Notice Here arrow function
+    el.addEventListener("change", function () {
+      if (this.value !== sortKey) {
+        sortKey = this.value;
+        renderPlayers();
+      }
+    });
   });
+}
 
-  sortSelect.addEventListener("change", (event) => {
-    handleFilterChange("sort", event.target.value);
-  });
+export function initialApp() {
+  loadPlayers();
+  loadPositions();
+  loadNationality();
 
-  resetButton.addEventListener("click", () => {
-    state.filters = { search: "", position: "", nationality: "", sort: SortKey.OVERALL };
-    searchField.value = "";
-    positionSelect.value = "";
-    nationalitySelect.value = "";
-    sortSelect.value = SortKey.OVERALL;
-    refreshPlayers();
-  });
-};
-
-const bootstrap = async () => {
-  toggleLoading(true);
-  try {
-    state.meta = await fetchMeta();
-    renderMeta();
-    await refreshPlayers();
-  } catch (err) {
-    summaryBar.textContent = `Unable to load data: ${err.message}`;
-  } finally {
-    toggleLoading(false);
-  }
-  wireEvents();
-};
-
-export const initialApp = () => {
-  bootstrap();
-};
+  setupEventListener();
+}
