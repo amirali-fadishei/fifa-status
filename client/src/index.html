@@ -2,105 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Fifa 21 Players</title>
+    <title>FC 24 Player Radar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Fifa 21 Players</a>
+    <header class="hero">
+      <div class="hero__content container">
+        <p class="text-uppercase text-secondary small mb-1">Live roster snapshot</p>
+        <h1 class="display-6 fw-bold mb-2">FC 24 Player Radar</h1>
+        <p class="lead text-body-secondary mb-0">
+          Search and filter the latest star players with modern filters and fast responses powered by the refreshed API.
+        </p>
       </div>
-    </nav>
-    <div class="container-fluid mt-3">
-      <div class="row">
-        <div class="col-md-3 col-12 mb-3 mb-md-0">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="mb-3">Filters</h4>
-              <select id="position-select" class="form-select mb-3">
-                <option selected disabled value="">Position</option>
-              </select>
-              <select id="nationality-select" class="form-select mb-3">
-                <option selected disabled value="">Nationality</option>
-              </select>
-              <div class="d-grid gap-2">
-                <button id="filter-btn" class="btn btn-primary" type="button">
-                  Submit
-                </button>
-              </div>
-            </div>
+    </header>
+
+    <main class="container py-4">
+      <section class="filters shadow-sm">
+        <div class="row gy-3 align-items-end">
+          <div class="col-12 col-lg-4">
+            <label for="search-field" class="form-label">Search by name or club</label>
+            <input class="form-control" id="search-field" placeholder="Type to search..." />
+          </div>
+          <div class="col-6 col-lg-2">
+            <label for="position-select" class="form-label">Position</label>
+            <select id="position-select" class="form-select"></select>
+          </div>
+          <div class="col-6 col-lg-2">
+            <label for="nationality-select" class="form-label">Nationality</label>
+            <select id="nationality-select" class="form-select"></select>
+          </div>
+          <div class="col-6 col-lg-2">
+            <label for="sort-select" class="form-label">Sort by</label>
+            <select id="sort-select" class="form-select">
+              <option value="overall">Overall</option>
+              <option value="potential">Potential</option>
+              <option value="name">Name</option>
+              <option value="age">Age</option>
+            </select>
+          </div>
+          <div class="col-6 col-lg-2 d-grid">
+            <button id="reset-btn" class="btn btn-outline-secondary">Reset filters</button>
           </div>
         </div>
-        <div class="col-md-9 col-12">
-          <div>
-            <input
-              class="form-control"
-              id="search-field"
-              placeholder="Search..."
-            />
-          </div>
-          <hr />
-          <div class="mb-3">
-            <small class="text-muted me-2">Sort base on:</small>
-            <div class="btn-group btn-group-sm" role="group">
-              <input
-                type="radio"
-                class="btn-check"
-                name="sort-radio"
-                id="sort-radio-overall"
-                value="sort-radio-overall"
-                autocomplete="off"
-                checked
-              />
-              <label class="btn btn-outline-primary" for="sort-radio-overall">
-                Overall
-              </label>
+      </section>
 
-              <input
-                type="radio"
-                class="btn-check"
-                name="sort-radio"
-                id="sort-radio-name"
-                value="sort-radio-name"
-                autocomplete="off"
-              />
-              <label class="btn btn-outline-primary" for="sort-radio-name">
-                Name
-              </label>
-
-              <input
-                type="radio"
-                class="btn-check"
-                name="sort-radio"
-                id="sort-radio-age"
-                value="sort-radio-age"
-                autocomplete="off"
-              />
-              <label class="btn btn-outline-primary" for="sort-radio-age">
-                Age
-              </label>
-            </div>
-          </div>
-          <div class="card">
-            <div class="table-responsive">
-              <table id="players-table" class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col"></th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Club Team</th>
-                    <th scope="col">OVR</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Nationality</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
+      <section class="d-flex justify-content-between align-items-center mt-3 mb-2">
+        <div id="summary-text" class="text-muted">Loading...</div>
+        <div id="loading-banner" class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section id="players-grid" class="player-grid"></section>
+    </main>
   </body>
 </html>
