@@ -1,0 +1,380 @@
+[
+    {
+        "id": 1,
+        "shortName": "Kylian Mbappé",
+        "overall": 90,
+        "age": 25,
+        "nationality": "France",
+        "clubName": "Real Madrid",
+        "positions": [
+            "ST",
+            "LW"
+        ],
+        "imageUrl": "/images/231747.png"
+    },
+    {
+        "id": 2,
+        "shortName": "Erling Haaland",
+        "overall": 90,
+        "age": 23,
+        "nationality": "Norway",
+        "clubName": "Manchester City",
+        "positions": [
+            "ST"
+        ],
+        "imageUrl": "/images/239085.png"
+    },
+    {
+        "id": 3,
+        "shortName": "Rodri",
+        "overall": 91,
+        "age": 28,
+        "nationality": "Spain",
+        "clubName": "Manchester City",
+        "positions": [
+            "CDM",
+            "CM"
+        ],
+        "imageUrl": "/images/231866.png"
+    },
+    {
+        "id": 4,
+        "shortName": "Jude Bellingham",
+        "overall": 90,
+        "age": 21,
+        "nationality": "England",
+        "clubName": "Real Madrid",
+        "positions": [
+            "CAM",
+            "CM"
+        ],
+        "imageUrl": "/images/252371.png"
+    },
+    {
+        "id": 5,
+        "shortName": "Vini Jr.",
+        "overall": 90,
+        "age": 23,
+        "nationality": "Brazil",
+        "clubName": "Real Madrid",
+        "positions": [
+            "LW",
+            "ST"
+        ],
+        "imageUrl": "/images/238794.png"
+    },
+    {
+        "id": 6,
+        "shortName": "Kevin De Bruyne",
+        "overall": 89,
+        "age": 33,
+        "nationality": "Belgium",
+        "clubName": "Manchester City",
+        "positions": [
+            "CM",
+            "CAM"
+        ],
+        "imageUrl": "/images/192985.png"
+    },
+    {
+        "id": 7,
+        "shortName": "Harry Kane",
+        "overall": 90,
+        "age": 30,
+        "nationality": "England",
+        "clubName": "FC Bayern München",
+        "positions": [
+            "ST"
+        ],
+        "imageUrl": "/images/202126.png"
+    },
+    {
+        "id": 8,
+        "shortName": "Martin Ødegaard",
+        "overall": 87,
+        "age": 25,
+        "nationality": "Norway",
+        "clubName": "Arsenal",
+        "positions": [
+            "CM"
+        ],
+        "imageUrl": "/images/222665.png"
+    },
+    {
+        "id": 9,
+        "shortName": "Gianluigi Donnarumma",
+        "overall": 87,
+        "age": 25,
+        "nationality": "Italy",
+        "clubName": "Paris Saint-Germain",
+        "positions": [
+            "GK"
+        ],
+        "imageUrl": "/images/230621.png"
+    },
+    {
+        "id": 10,
+        "shortName": "Alisson Ramses Becker",
+        "overall": 89,
+        "age": 31,
+        "nationality": "Brazil",
+        "clubName": "Liverpool",
+        "positions": [
+            "GK"
+        ],
+        "imageUrl": "/images/212831.png"
+    },
+    {
+        "id": 11,
+        "shortName": "Thibaut Courtois",
+        "overall": 89,
+        "age": 32,
+        "nationality": "Belgium",
+        "clubName": "Real Madrid",
+        "positions": [
+            "GK"
+        ],
+        "imageUrl": "/images/192119.png"
+    },
+    {
+        "id": 12,
+        "shortName": "Lautaro Martínez",
+        "overall": 88,
+        "age": 26,
+        "nationality": "Argentina",
+        "clubName": "Inter Milan",
+        "positions": [
+            "ST"
+        ],
+        "imageUrl": "/images/231478.png"
+    },
+    {
+        "id": 13,
+        "shortName": "Virgil van Dijk",
+        "overall": 90,
+        "age": 33,
+        "nationality": "Netherlands",
+        "clubName": "Liverpool",
+        "positions": [
+            "CB"
+        ],
+        "imageUrl": "/images/203376.png"
+    },
+    {
+        "id": 14,
+        "shortName": "Marc-André ter Stegen",
+        "overall": 88,
+        "age": 32,
+        "nationality": "Germany",
+        "clubName": "FC Barcelona",
+        "positions": [
+            "GK"
+        ],
+        "imageUrl": "/images/192448.png"
+    },
+    {
+        "id": 15,
+        "shortName": "Mohamed Salah",
+        "overall": 91,
+        "age": 32,
+        "nationality": "Egypt",
+        "clubName": "Liverpool",
+        "positions": [
+            "RW"
+        ],
+        "imageUrl": "/images/209331.png"
+    },
+    {
+        "id": 16,
+        "shortName": "Robert Lewandowski",
+        "overall": 89,
+        "age": 35,
+        "nationality": "Poland",
+        "clubName": "FC Barcelona",
+        "positions": [
+            "ST"
+        ],
+        "imageUrl": "/images/188545.png"
+    },
+    {
+        "id": 17,
+        "shortName": "Antoine Griezmann",
+        "overall": 87,
+        "age": 33,
+        "nationality": "France",
+        "clubName": "Atlético de Madrid",
+        "positions": [
+            "ST",
+            "LM"
+        ],
+        "imageUrl": "/images/194765.png"
+    },
+    {
+        "id": 18,
+        "shortName": "Rúben Dias",
+        "overall": 86,
+        "age": 25,
+        "nationality": "Portugal",
+        "clubName": "Manchester City",
+        "positions": [
+            "CB"
+        ],
+        "imageUrl": "/images/243715.png"
+    },
+    {
+        "id": 19,
+        "shortName": "Lionel Messi",
+        "overall": 87,
+        "age": 37,
+        "nationality": "Argentina",
+        "clubName": "Inter Miami",
+        "positions": [
+            "RW",
+            "ST",
+            "CAM"
+        ],
+        "imageUrl": "/images/158023.png"
+    },
+    {
+        "id": 20,
+        "shortName": "Phil Foden",
+        "overall": 86,
+        "age": 24,
+        "nationality": "England",
+        "clubName": "Manchester City",
+        "positions": [
+            "RW",
+            "CM",
+            "LW"
+        ],
+        "imageUrl": "/images/237692.png"
+    },
+    {
+        "id": 21,
+        "shortName": "Jan Oblak",
+        "overall": 88,
+        "age": 31,
+        "nationality": "Slovenia",
+        "clubName": "Atlético de Madrid",
+        "positions": [
+            "GK"
+        ],
+        "imageUrl": "/images/200389.png"
+    },
+    {
+        "id": 22,
+        "shortName": "Bernardo Silva",
+        "overall": 85,
+        "age": 29,
+        "nationality": "Portugal",
+        "clubName": "Manchester City",
+        "positions": [
+            "CM",
+            "RW"
+        ],
+        "imageUrl": "/images/218667.png"
+    },
+    {
+        "id": 23,
+        "shortName": "Federico Valverde",
+        "overall": 88,
+        "age": 25,
+        "nationality": "Uruguay",
+        "clubName": "Real Madrid",
+        "positions": [
+            "CM",
+            "RB",
+            "CDM"
+        ],
+        "imageUrl": "/images/239053.png"
+    },
+    {
+        "id": 24,
+        "shortName": "Antonio Rüdiger",
+        "overall": 88,
+        "age": 31,
+        "nationality": "Germany",
+        "clubName": "Real Madrid",
+        "positions": [
+            "CB"
+        ],
+        "imageUrl": "/images/205452.png"
+    },
+    {
+        "id": 25,
+        "shortName": "Joshua Kimmich",
+        "overall": 88,
+        "age": 29,
+        "nationality": "Germany",
+        "clubName": "FC Bayern München",
+        "positions": [
+            "CDM",
+            "RB"
+        ],
+        "imageUrl": "/images/212622.png"
+    },
+    {
+        "id": 26,
+        "shortName": "Bukayo Saka",
+        "overall": 88,
+        "age": 22,
+        "nationality": "England",
+        "clubName": "Arsenal",
+        "positions": [
+            "RW",
+            "RM"
+        ],
+        "imageUrl": "/images/246669.png"
+    },
+    {
+        "id": 27,
+        "shortName": "Jamal Musiala",
+        "overall": 88,
+        "age": 21,
+        "nationality": "Germany",
+        "clubName": "FC Bayern München",
+        "positions": [
+            "CAM",
+            "LM",
+            "CM"
+        ],
+        "imageUrl": "/images/256790.png"
+    },
+    {
+        "id": 28,
+        "shortName": "Alessandro Bastoni",
+        "overall": 87,
+        "age": 25,
+        "nationality": "Italy",
+        "clubName": "Inter Milan",
+        "positions": [
+            "CB"
+        ],
+        "imageUrl": "/images/237383.png"
+    },
+    {
+        "id": 29,
+        "shortName": "William Saliba",
+        "overall": 87,
+        "age": 23,
+        "nationality": "France",
+        "clubName": "Arsenal",
+        "positions": [
+            "CB"
+        ],
+        "imageUrl": "/images/243715.png"
+    },
+    {
+        "id": 30,
+        "shortName": "Cole Palmer",
+        "overall": 87,
+        "age": 22,
+        "nationality": "England",
+        "clubName": "Chelsea",
+        "positions": [
+            "CAM",
+            "RM"
+        ],
+        "imageUrl": "/images/257534.png"
+    }
+]
